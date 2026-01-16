@@ -44,4 +44,4 @@ export async function getPostalAddress(): Promise <returnData[]> {
     }
 }
 
-console.log(getPostalAddress())
+
