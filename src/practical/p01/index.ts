@@ -4,7 +4,7 @@ interface Data {
     id: number
     name: string
     phone: number
-    address: addressData 
+    address: addressData |null
 }
 
 interface addressData {
@@ -21,7 +21,7 @@ interface returnData {
     id: number
     name: string
     phone: number
-    address: addressData 
+    address: addressData | null
 }
 
 export async function getPostalAddress(): Promise <returnData[]> {
@@ -36,7 +36,16 @@ export async function getPostalAddress(): Promise <returnData[]> {
         id: s.id,
         name: s.name,
         phone: s.phone,
-        address: s.address
+        address: s.address ? {
+        street: s.address.street,
+        suite: s.address.suite,
+        city: s.address.city,
+        zipcode: s.address.zipcode,
+        geo: {
+            lat: s.address.geo.lat,
+            lng: s.address.geo.lng 
+        }
+        }: null
     }))
 
     } catch (error) {
